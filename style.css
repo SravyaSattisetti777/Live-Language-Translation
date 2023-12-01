@@ -13,7 +13,7 @@ body{
     justify-content: center;
     min-height: 100vh;
     /* background: skyblue; */
-    background: linear-gradient(to top left, #66ffff 0%, #ff6699 100%);
+    background: #5272F0;
 }
 
 .container{
