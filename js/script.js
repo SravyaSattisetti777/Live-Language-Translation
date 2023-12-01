@@ -53,14 +53,30 @@ fromText.addEventListener("input", function() {
 });
 
 icons.forEach(icon => {
-    icon.addEventListener("click", ({target}) => {
-        if(target.classList.contains("fa-copy")){
-            if(target.id == "from"){
+    icon.addEventListener("click", ({ target }) => {
+        if (target.classList.contains("fa-copy")) {
+            let notificationBox = document.getElementById("notificationBox");
+            let notificationMessage = document.getElementById("notificationMessage");
+
+            if (target.id == "from") {
                 navigator.clipboard.writeText(fromText.value);
-                
+                notificationMessage.textContent = "Text copied from source";
             } else {
                 navigator.clipboard.writeText(toText.value);
+                notificationMessage.textContent = "Text copied from translation";
             }
+
+            let iconRect = target.getBoundingClientRect();
+            let iconTop = iconRect.top - document.body.getBoundingClientRect().top;
+            let iconLeft = iconRect.left - document.body.getBoundingClientRect().left;
+
+            notificationBox.style.top = iconTop - 50 + "px";
+            notificationBox.style.left = iconLeft + "px";
+            notificationBox.style.display = "block";
+
+            setTimeout(() => {
+                notificationBox.style.display = "none";
+            }, 2000);
         } else{
             let utterance;
             if(target.id == "from"){
